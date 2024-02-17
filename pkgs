@@ -1,0 +1,102 @@
+#!/bin/sh
+
+# Check if a command exists
+command_exists() {
+    type "$1" &> /dev/null
+}
+
+# Count packages
+count_packages() {
+    local cmd="$1"
+    shift
+    $cmd "$@" | wc -l
+}
+
+# Check all package managers
+if command_exists bonsai; then               # Bonsai
+    count_packages bonsai list
+elif command_exists crux; then              # Crux
+    count_packages pkginfo -i
+elif command_exists pacman-key; then        # Arch
+    count_packages pacman -Qq
+elif command_exists dpkg; then              # Debian
+    count_packages dpkg-query -f '.\n' -W
+elif command_exists rpm; then               # Fedora
+    count_packages rpm -qa
+elif command_exists xbps-query; then        # Void
+    count_packages xbps-query -l
+elif command_exists apk; then               # Alpine
+    count_packages apk info
+elif command_exists guix; then              # Guix
+    count_packages guix package --list-installed
+elif command_exists opkg; then              # OpenWrt
+    count_packages opkg list-installed
+elif command_exists kiss; then              # KISS
+    count_packages printf '%s\n' /var/db/kiss/installed/*/
+elif command_exists cpt-list; then          # CPT
+    count_packages printf '%s\n' /var/db/cpt/installed/*/
+elif command_exists brew; then              # Homebrew (macOS)
+    if [[ "$(uname)" == "Darwin" ]]; then
+        count_packages printf '%s\n' "$(brew --cellar)/"*
+    else
+        count_packages printf '%s\n' /usr/local/Cellar/*
+    fi
+elif command_exists emerge; then            # Gentoo
+    count_packages printf '%s\n' /var/db/pkg/*/*/
+elif command_exists pkgtool; then           # Slackware
+    count_packages printf '%s\n' /var/log/packages/*
+elif command_exists eopkg; then             # Solus
+    count_packages printf '%s\n' /var/lib/eopkg/package/*
+elif command_exists nix-store; then         # NixOS
+    count_packages sh -c 'nix-store -q --requisites /run/current-system/sw && nix-store -q --requisites ~/.nix-profile'
+elif command_exists pkgin; then             # pkgin
+    count_packages pkgin list
+elif command_exists port; then              # MacPorts
+    pkg_list=$(port installed)
+    case "$pkg_list" in
+        "No ports are installed.")
+            # Do nothing
+            ;;
+        *)
+            count_packages printf '%s\n' "$pkg_list"
+            ;;
+    esac
+elif command_exists pkg; then               # FreeBSD
+    count_packages pkg info
+elif command_exists pkg_info; then          # NetBSD
+    count_packages pkg_info
+elif command_exists versions; then          # DragonFlyBSD
+    count_packages versions -b
+else
+    case "$(uname)" in
+        OpenBSD*) # OpenBSD
+            count_packages printf '%s\n' /var/db/pkg/*/
+            ;;
+        Haiku) # Haiku
+            count_packages printf '%s\n' /boot/system/package-links/*
+            ;;
+        Minix) # Minix
+            count_packages printf '%s\n' /usr/pkg/var/db/pkg/*/
+            ;;
+        SunOS) # Solaris
+            if command_exists pkginfo; then
+                count_packages pkginfo -i
+            elif command_exists pkg; then
+                count_packages pkg list
+            fi
+            ;;
+        SerenityOS) # SerenityOS
+            while IFS=" " read -r type _; do
+                [ "$type" != dependency ] && printf "\n"
+            done < /usr/Ports/packages.db
+            ;;
+        *)
+            ;;
+    esac
+    if command_exists cargo; then           # Rust
+        count_packages cargo install --list
+    else
+        echo "Unknown"
+        exit 1
+    fi
+fi

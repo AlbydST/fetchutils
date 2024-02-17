@@ -1,0 +1,93 @@
+#!/bin/sh
+
+# Check if a command exists
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# systemd
+if command_exists systemctl; then
+  echo "systemd"
+  exit
+fi
+
+# Upstart
+if command_exists initctl; then
+  echo "Upstart"
+  exit
+fi
+
+# OpenRC
+if [ -d "/etc/runlevels" ]; then
+  echo "OpenRC"
+  exit
+fi
+
+# SMF
+if [ -d "/etc/svc" ]; then
+  echo "SMF"
+  exit
+fi
+
+# launchd
+if command_exists launchctl; then
+  echo "launchd"
+  exit
+fi
+
+# Epoch
+if command_exists initctl2dot; then
+  echo "Epoch"
+  exit
+fi
+
+# Finit
+if command_exists finit; then
+  echo "Finit"
+  exit
+fi
+
+# Runit
+if [ -d "/etc/runit" ]; then
+  echo "Runit"
+  exit
+fi
+
+# s6
+if [ -d "/etc/s6" ]; then
+  echo "S6"
+  exit
+fi
+
+# BSD rc.d
+if [ -d "/etc/rc.d" ]; then
+  echo "rc.d"
+  exit
+fi
+
+# dinit
+if [ -x /sbin/dinit ]; then
+  echo "Dinit"
+  exit
+fi
+
+# Suckless Init (Sinit)
+if [ -x /sbin/sinit ]; then
+  echo "sinit"
+  exit
+fi
+
+# SysVinit
+if command_exists sysv-rc; then
+  echo "SysVinit"
+  exit
+fi
+
+# BusyBox Init
+if command_exists busybox && busybox --list | grep -q "init"; then
+  echo "BusyBox Init"
+  exit
+fi
+
+echo "Unknown"
+
