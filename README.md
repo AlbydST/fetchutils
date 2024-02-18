@@ -73,6 +73,7 @@ This module prints the total number of installed packages in the system. It work
 - HaikuDepot (Haiku)
 - IPS (Solaris)
 - SerenityOS Packages
+- Cargo (Rust)
 
 ## Shell
 
