@@ -73,3 +73,30 @@ This module prints the total number of installed packages in the system. It work
 - HaikuDepot (Haiku)
 - IPS (Solaris)
 - SerenityOS Packages
+
+## Shell
+
+This module prints the pretty name for the default user shell. Unfortunately, this doesn't print the current shell since some shells like fish use different variable names, however a fix for this is in progress. Testers needed.
+
+
+### Supported Shells
+
+- Bourne Again Shell (bash)
+- C Shell (csh)
+- Debian Almquist Shell (dash)
+- Erlang Shell (esh)
+- Friendly Interactive Shell (fish)
+- OpenBSD Korn Shell (oksh)
+- MirBSD Korn Shell (mksh)
+- Korn Shell (ksh)
+- Stand-Alone Shell (sash)
+- TC Shell (tcsh)
+- Yet Another SHell (yash)
+- Z Shell (zsh)
+- PowerShell (pwsh)
+- QShell (qshell)
+- Scheme Shell (scsh)
+- Windowing Shell (wish)
+- Extensible Shell (es)
+- Run Commands Shell (rc)
+- Bourne Shell (sh)
