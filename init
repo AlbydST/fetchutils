@@ -53,7 +53,7 @@ if [ -d "/etc/runit" ]; then
   exit
 fi
 
-# s6
+# S6
 if [ -d "/etc/s6" ]; then
   echo "S6"
   exit
