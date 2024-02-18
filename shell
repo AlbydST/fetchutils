@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Print the pretty name for the given shell
+print_pretty_name() {
+    case "$1" in
+        *bash*) echo "Bourne Again Shell (bash)" ;;
+        *csh*) echo "C Shell (csh)" ;;
+        *dash*) echo "Debian Almquist Shell (dash)" ;;
+        *esh*) echo "Erlang Shell (esh)" ;;
+        *fish*) echo "Friendly Interactive Shell (fish)" ;;
+        *oksh*) echo "OpenBSD Korn Shell (oksh)" ;;
+        *mksh*) echo "MirBSD Korn Shell (mksh)" ;;
+        *ksh*) echo "Korn Shell (ksh)" ;;
+        *sash*) echo "Stand-Alone Shell (sash)" ;;
+        *tcsh*) echo "TC Shell (tcsh)" ;;
+        *yash*) echo "Yet Another SHell (yash)" ;;
+        *zsh*) echo "Z Shell (zsh)" ;;
+        *pwsh*) echo "PowerShell (pwsh)" ;;
+        *qshell*) echo "QShell (qshell)" ;;
+        *scsh*) echo "Scheme Shell (scsh)" ;;
+        *wish*) echo "Windowing Shell (wish)" ;;
+        *es*) echo "Extensible Shell (es)" ;;
+        *rc*) echo "Run Commands Shell (rc)" ;;
+        *sh*) echo "Bourne Shell (sh)" ;;
+        *) echo "Unknown" ;;
+    esac
+}
+
+# Print pretty name for default shell
+echo $(print_pretty_name $SHELL)
