@@ -19,8 +19,12 @@ elif command_exists crux; then              # Crux
     count_packages pkginfo -i
 elif command_exists pacman-key; then        # Arch
     count_packages pacman -Qq
-elif command_exists dpkg; then              # Debian
-    count_packages dpkg-query -f '.\n' -W
+elif command_exists apt; then               # Debian
+  if [[ $(lsb_release -cs) == "focal" || $(lsb_release -cs) == "jammy" ]]; then
+    count_packages apt list --installed --quiet | wc -l
+  else
+    count_packages apt-cache pkgnames
+  fi
 elif command_exists rpm; then               # Fedora
     count_packages rpm -qa
 elif command_exists xbps-query; then        # Void
