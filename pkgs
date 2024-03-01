@@ -35,6 +35,8 @@ elif command_exists guix; then              # Guix
     count_packages guix package --list-installed
 elif command_exists opkg; then              # OpenWrt
     count_packages opkg list-installed
+elif command_exists radula; then              # Glaucus
+    count_packages radula -ch
 elif command_exists kiss; then              # KISS
     count_packages printf '%s\n' /var/db/kiss/installed/*/
 elif command_exists cpt-list; then          # CPT
