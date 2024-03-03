@@ -42,6 +42,8 @@ This module prints the current init system. This individually checks for init fi
 - Sinit
 - SysVinit
 - BusyBox Init
+- Knoppix-Autoconfig
+- Shepherd
 
 ## Packages
 
