@@ -89,5 +89,17 @@ if command_exists busybox && busybox --list | grep -q "init"; then
   exit
 fi
 
+# Knoppix-autoconfig
+if [ -d "/etc/init.d/knoppix-autoconfig" ]; then
+  echo "Knoppix-Autoconfig"
+  exit
+fi
+
+# Shepherd
+if command_exists herd; then
+  echo "Shepherd"
+  exit
+fi
+
 echo "Unknown"
 
