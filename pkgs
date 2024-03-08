@@ -98,9 +98,12 @@ else
             ;;
         *)
             ;;
-    esac
     if command_exists cargo; then           # Rust
         count_packages cargo install --list
+    elif command_exists flatpak; then       # Flatpak
+        count_packages flatpak list
+    elif command_exists snap; then          # Snap
+        count_packages snap list
     else
         echo "Unknown"
         exit 1
