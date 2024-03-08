@@ -76,6 +76,8 @@ This module prints the total number of installed packages in the system. It work
 - IPS (Solaris)
 - SerenityOS Packages
 - Cargo (Rust)
+- Flatpak
+- Snap
 
 ## Shell
 
