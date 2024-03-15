@@ -78,6 +78,8 @@ This module prints the total number of installed packages in the system. It work
 - Cargo (Rust)
 - Flatpak
 - Snap
+- Urpmq (Mageia)
+- Birb (Birb Linux)
 
 ## Shell
 
