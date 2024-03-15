@@ -53,6 +53,10 @@ elif command_exists pkgtool; then           # Slackware
     count_packages printf '%s\n' /var/log/packages/*
 elif command_exists eopkg; then             # Solus
     count_packages printf '%s\n' /var/lib/eopkg/package/*
+elif command_exists birb; then              # Birb
+    count_packages birb --list-installed
+elif command_exists urpmq; then             # Mageia
+    count_packages urpmq --list-media active
 elif command_exists nix-store; then         # NixOS
     count_packages sh -c 'nix-store -q --requisites /run/current-system/sw && nix-store -q --requisites ~/.nix-profile'
 elif command_exists pkgin; then             # pkgin
