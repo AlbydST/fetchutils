@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Check if a command exists
+command_exists() {
+    type "$1" &> /dev/null
+}
+
+# Check all package managers
+if command_exists bonsai; then              # Bonsai
+    echo "Bonsai"
+elif command_exists crux; then              # CRUX
+    echo "CRUX"
+elif command_exists pacman-key; then        # Pacman
+    echo "Pacman"
+elif command_exists apt; then               # APT
+    echo "Advanced Package Tool (APT)"
+elif command_exists rpm; then               # RPM
+    echo "Red Hat Package Manager (RPM)"
+elif command_exists xbps-query; then        # XBPS
+    echo "X Binary Package System (XBPS)"
+elif command_exists apk; then               # APK
+    echo "Alpine Package Keeper (APK)"
+elif command_exists guix; then              # Guix
+    echo "GNU Guix"
+elif command_exists opkg; then              # Opkg
+    echo "Opkg"
+elif command_exists radula; then            # Radula
+    echo "Radula"
+elif command_exists kiss; then              # KISS
+    echo "Keep it simple, stupid! (KISS)"
+elif command_exists cpt-list; then          # CPT
+    echo "Carbs Packaging Tools (CPT)"
+elif command_exists brew; then              # Homebrew
+    echo "Homebrew"
+elif command_exists emerge; then            # Portage
+    echo "Portage"
+elif command_exists pkgtool; then           # SlackPKG
+    echo "SlackPKG"
+elif command_exists eopkg; then             # Eopkg
+    echo "Evolve OS Package Manager (Eopkg)"
+elif command_exists birb; then              # Birb
+    echo "Birb"
+elif command_exists urpmq; then             # urpmi
+    echo "Unified RPM Install (Urpmi)"
+elif command_exists nix-store; then         # Nix
+    echo "Nix"
+elif command_exists pkgin; then             # pkgin
+    echo "Package Installer (Pkgin)"
+elif command_exists port; then              # MacPorts
+    echo "MacPorts"
+elif command_exists pkg; then               # Pkg
+    echo "Pkg"
+elif command_exists pkg_info; then          # PkgSrc
+    echo "PkgSrc"
+elif command_exists versions; then          # DPorts
+    echo "DPorts"
+elif command_exists cargo; then             # Cargo
+    echo "Cargo"
+elif command_exists flatpak; then           # Flatpak
+    echo "Flatpak"
+elif command_exists snap; then              # Snap
+    echo "Snap"
+else
+    echo "Unknown"
+    exit 1
+fi
