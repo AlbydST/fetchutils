@@ -64,8 +64,8 @@ elif command_exists pkgin; then             # pkgin
 elif command_exists port; then              # MacPorts
     pkg_list=$(port installed)
     case "$pkg_list" in
-        "0")
-            # Do nothing
+        "No ports are installed.")
+            echo "0"
             ;;
         *)
             count_packages printf '%s\n' "$pkg_list"
