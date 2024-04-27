@@ -64,7 +64,7 @@ elif command_exists pkgin; then             # pkgin
 elif command_exists port; then              # MacPorts
     pkg_list=$(port installed)
     case "$pkg_list" in
-        "No ports are installed.")
+        "0")
             # Do nothing
             ;;
         *)
